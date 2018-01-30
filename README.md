@@ -118,4 +118,5 @@ Run multiple instances in localhost. Make sure they use different ports and they
 2018-01-29 17:28:22.764 INFO  MainVerticle:39 - [testing:publish] nodeID: f8303bf4-10ee-4dd2-898a-6378cd762374, deploymentID: 86e8a52f-681a-4287-b194-87d81af549af, thread: vert.x-eventloop-thread-4
 2018-01-29 17:28:22.764 INFO  MainVerticle:39 - [testing:publish] nodeID: f8303bf4-10ee-4dd2-898a-6378cd762374, deploymentID: 95a6c607-6bd4-4d5a-8a2a-d568d0a3664a, thread: vert.x-eventloop-thread-3
 ```
-
+### 10. Check how /about is implemented
+/about can collect the whole cluster's status across multiple nodes. Basically a node cannot know the detail of another node. But a node can know a list of nodeID in the cluster. Each node setup an EventBus consumer with its nodeID. By this way, other nodes can send messages to this node to get this node's information. 
