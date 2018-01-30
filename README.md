@@ -104,6 +104,12 @@ That means the actually running sequence is not from top to bottom. This will gi
 Open a browser and visit `localhost:8080/test1`. The result will indicate which MainVerticle Object handled the request. Refresh the browser and observe the results. Open an incognito window to do the same thing and observe the results.
 ### 8. Test sending message to EventBus address
 Run multiple instances in localhost. Make sure they use different ports and they are clustered together. Visit `localhost:8080/test2`. /test2 will send a message to an address on EventBus and wait for the reply. The reply contains where the consumer was running on. The response will show where the consumer was running on and where the request handler was running on. Refresh the browser and observe the results.
+Also you can see logs like this:
+```
+2018-01-29 17:33:14.732 INFO  Dispatcher:80 - Verticle runs in: vert.x-eventloop-thread-5
+2018-01-29 17:33:14.741 INFO  Dispatcher:82 - EventBus send handler runs in: vert.x-eventloop-thread-5
+```
+Here the request handler and EventBus handler are running on the same thread.
 ### 9. Test publishing on EventBus address
 Run multiple instances in localhost. Make sure they use different ports and they are clustered together. Visit `localhost:8080/test3`. /test3 will publish on an EventBus address. We can see logs like this:
 ```
