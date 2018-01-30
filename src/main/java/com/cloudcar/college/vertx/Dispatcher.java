@@ -61,6 +61,7 @@ public class Dispatcher
 
 	public void test1(RoutingContext routingContext)
 	{
+		logger.info("hit /test1");
 		JsonObject result = new JsonObject();
 		result.put("port", CloudCarClientUtil.getPort());
 		result.put("nodeID", CloudCarClientUtil.getClusterManager().getNodeID());
@@ -74,8 +75,11 @@ public class Dispatcher
 
 	public void test2(RoutingContext routingContext)
 	{
+		logger.info("hit /test2");
 		EventBus eventBus = CloudCarClientUtil.getVertx().eventBus();
+		logger.info("Verticle runs in: " + Thread.currentThread().getName());
 		eventBus.send("testing:send", "", h -> {
+			logger.info("EventBus send handler runs in: " + Thread.currentThread().getName());
 			JsonObject ret = new JsonObject();
 			JsonObject runningOn = new JsonObject();
 			runningOn.put("port", CloudCarClientUtil.getPort());
@@ -94,6 +98,7 @@ public class Dispatcher
 
 	public void test3(RoutingContext routingContext)
 	{
+		logger.info("hit /test3");
 		EventBus eventBus = CloudCarClientUtil.getVertx().eventBus();
 		eventBus.publish("testing:publish", "");
 		JsonObject runningOn = new JsonObject();
